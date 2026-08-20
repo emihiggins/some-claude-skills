@@ -47,8 +47,11 @@ Restart Claude Code and the skill will be discovered automatically.
 
 | Skill | Description |
 | --- | --- |
+| [`brainstorm`](skills/brainstorm/SKILL.md) | Structured design-exploration dialogue for turning vague ideas into concrete designs before implementation planning. |
+| [`create-skill`](skills/create-skill/SKILL.md) | Unified authoring lifecycle for new skills, workflows, and agents inside a Claude Code plugin — scaffolds files, checks taxonomy, and validates structure. |
 | [`day-in-review`](skills/day-in-review/SKILL.md) | Builds an end-of-day HTML work recap from GitHub, Jira, calendar, Confluence, Slack, and deploy sources, plus a cumulative local ledger. |
 | [`scaffold-skill-marketplace`](skills/scaffold-skill-marketplace/SKILL.md) | Scaffolds a new git repository structured as a Claude Code plugin marketplace — this repo was bootstrapped with it. |
+| [`setup-feature-branch`](skills/setup-feature-branch/SKILL.md) | Creates a properly-named git feature branch, optionally deriving a name from a ticket via any available issue-tracker MCP. |
 
 ## Local development
 
