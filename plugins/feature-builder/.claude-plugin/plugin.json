@@ -1,0 +1,9 @@
+{
+  "name": "feature-builder",
+  "version": "1.0.0",
+  "description": "Multi-agent feature-development workflow with 8 specialized subagents, workflow-enforcement hooks, and stack templates.",
+  "author": {
+    "name": "Emi Higgins",
+    "email": "emaliahiggins5@gmail.com"
+  }
+}

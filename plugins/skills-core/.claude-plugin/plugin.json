@@ -1,0 +1,9 @@
+{
+  "name": "skills-core",
+  "version": "1.0.0",
+  "description": "Atomic, framework-free Claude Code skills. Installs a single skill-recommender hook and nothing else.",
+  "author": {
+    "name": "Emi Higgins",
+    "email": "emaliahiggins5@gmail.com"
+  }
+}

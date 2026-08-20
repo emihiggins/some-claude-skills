@@ -1,5 +1,5 @@
 {
-  "description": "Marketplace-wide hooks. Includes the skill-recommender plus feature-builder workflow enforcement hooks (agent protocol, common-mistake prevention, session-state validation).",
+  "description": "Feature Builder workflow enforcement hooks — ensures agents follow protocol, prevents common mistakes, and validates session state.",
   "hooks": {
     "Stop": [
       {
@@ -85,10 +85,6 @@
     "UserPromptSubmit": [
       {
         "hooks": [
-          {
-            "type": "command",
-            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/recommend-skills.sh\""
-          },
           {
             "type": "command",
             "command": "${CLAUDE_PLUGIN_ROOT}/hooks/inject-session-context.sh",

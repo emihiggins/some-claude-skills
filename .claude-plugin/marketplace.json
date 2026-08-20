@@ -5,14 +5,22 @@
     "email": "emaliahiggins5@gmail.com"
   },
   "metadata": {
-    "description": "Claude Code skills and agents for some-claude-skills",
+    "description": "A marketplace of Claude Code plugins — atomic skills and an opinionated multi-agent feature workflow.",
     "version": "1.0.0"
   },
   "plugins": [
     {
-      "name": "some-claude-skills",
-      "description": "Claude Code skills and agents for some-claude-skills",
-      "source": "./",
+      "name": "skills-core",
+      "description": "Atomic, framework-free Claude Code skills (brainstorm, day-in-review, create-skill, scaffold-skill-marketplace, setup-feature-branch, example-tool-skill). Installs a single skill-recommender hook and nothing else.",
+      "source": "./plugins/skills-core",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "feature-builder",
+      "description": "Multi-agent feature-development workflow: workflow-build-feature + generate-project-context, backed by 8 specialized subagents, workflow-enforcement hooks, and stack templates. Opt in only if you want the orchestrated build loop.",
+      "source": "./plugins/feature-builder",
       "strict": false,
       "version": "1.0.0",
       "category": "development"
