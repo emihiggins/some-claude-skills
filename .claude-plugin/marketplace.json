@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Claude Code skills and agents for some-claude-skills",
-    "version": "0.1.0"
+    "version": "1.0.0"
   },
   "plugins": [
     {
@@ -14,7 +14,7 @@
       "description": "Claude Code skills and agents for some-claude-skills",
       "source": "./",
       "strict": false,
-      "version": "0.1.0",
+      "version": "1.0.0",
       "category": "development"
     }
   ]
