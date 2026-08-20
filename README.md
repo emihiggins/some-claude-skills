@@ -50,8 +50,10 @@ Restart Claude Code and the skill will be discovered automatically.
 | [`brainstorm`](skills/brainstorm/SKILL.md) | Structured design-exploration dialogue for turning vague ideas into concrete designs before implementation planning. |
 | [`create-skill`](skills/create-skill/SKILL.md) | Unified authoring lifecycle for new skills, workflows, and agents inside a Claude Code plugin — scaffolds files, checks taxonomy, and validates structure. |
 | [`day-in-review`](skills/day-in-review/SKILL.md) | Builds an end-of-day HTML work recap from GitHub, Jira, calendar, Confluence, Slack, and deploy sources, plus a cumulative local ledger. |
+| [`generate-project-context`](skills/generate-project-context/SKILL.md) | Generates or sets up a project's `CLAUDE.md` via auto-scan, stack template, or guided creation so downstream workflow agents have the context they need. |
 | [`scaffold-skill-marketplace`](skills/scaffold-skill-marketplace/SKILL.md) | Scaffolds a new git repository structured as a Claude Code plugin marketplace — this repo was bootstrapped with it. |
 | [`setup-feature-branch`](skills/setup-feature-branch/SKILL.md) | Creates a properly-named git feature branch, optionally deriving a name from a ticket via any available issue-tracker MCP. |
+| [`workflow-build-feature`](skills/workflow-build-feature/SKILL.md) | Multi-agent orchestrator that drives a feature from requirements through plan, implement, review, and test in an iterative loop. Ships with 8 subagents, workflow hooks, and helper scripts. |
 
 ## Local development
 
