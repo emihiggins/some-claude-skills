@@ -16,7 +16,7 @@ Add this to the consuming repo's `.claude/settings.json`:
 {
   "extraKnownMarketplaces": {
     "some-claude-skills": {
-      "source": { "source": "github", "repo": "<owner>/<repo>" }
+      "source": { "source": "github", "repo": "emihiggins/some-claude-skills" }
     }
   },
   "enabledPlugins": {
@@ -25,14 +25,30 @@ Add this to the consuming repo's `.claude/settings.json`:
 }
 ```
 
-Replace `<owner>/<repo>` with this repository's GitHub path.
-
 ### For an individual developer
 
 ```bash
-claude /plugin marketplace add <owner>/<repo>
+claude /plugin marketplace add emihiggins/some-claude-skills
 claude /plugin install some-claude-skills@some-claude-skills
 ```
+
+### Grab a single skill (no plugin install)
+
+If you'd rather copy just one skill into your personal `~/.claude/skills/`:
+
+```bash
+git clone https://github.com/emihiggins/some-claude-skills.git /tmp/scs
+cp -R /tmp/scs/skills/<skill-name> ~/.claude/skills/
+```
+
+Restart Claude Code and the skill will be discovered automatically.
+
+## Available skills
+
+| Skill | Description |
+| --- | --- |
+| [`day-in-review`](skills/day-in-review/SKILL.md) | Builds an end-of-day HTML work recap from GitHub, Jira, calendar, Confluence, Slack, and deploy sources, plus a cumulative local ledger. |
+| [`scaffold-skill-marketplace`](skills/scaffold-skill-marketplace/SKILL.md) | Scaffolds a new git repository structured as a Claude Code plugin marketplace — this repo was bootstrapped with it. |
 
 ## Local development
 
