@@ -1,0 +1,21 @@
+{
+  "name": "{{MARKETPLACE_NAME}}",
+  "owner": {
+    "name": "{{OWNER_NAME}}",
+    "email": "{{OWNER_EMAIL}}"
+  },
+  "metadata": {
+    "description": "{{DESCRIPTION}}",
+    "version": "{{VERSION}}"
+  },
+  "plugins": [
+    {
+      "name": "{{PLUGIN_NAME}}",
+      "description": "{{DESCRIPTION}}",
+      "source": "./",
+      "strict": false,
+      "version": "{{VERSION}}",
+      "category": "development"
+    }
+  ]
+}
