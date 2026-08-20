@@ -1,0 +1,21 @@
+{
+  "name": "some-claude-skills",
+  "owner": {
+    "name": "Emi Higgins",
+    "email": "emaliahiggins5@gmail.com"
+  },
+  "metadata": {
+    "description": "Claude Code skills and agents for some-claude-skills",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "some-claude-skills",
+      "description": "Claude Code skills and agents for some-claude-skills",
+      "source": "./",
+      "strict": false,
+      "version": "0.1.0",
+      "category": "development"
+    }
+  ]
+}

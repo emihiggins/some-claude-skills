@@ -1,0 +1,16 @@
+# Node / semantic-release
+node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+
+# Secrets — never commit
+.env
+.env.*
+*.secret
+secrets.json
