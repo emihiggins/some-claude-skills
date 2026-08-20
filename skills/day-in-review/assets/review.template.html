@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Day in Review · Wed 19 Aug 2026</title><!-- update the date every run -->
+<!--FONTS--><!-- scripts/embed_fonts.py replaces this marker with the @font-face block. Leave it alone. -->
+<style>
+/* ============================================================
+   THE BRIEF — "Digest"
+   Copy this file, replace the content, leave this stylesheet alone.
+   Archivo is embedded at build time by scripts/embed_fonts.py;
+   without it the page falls back to the system sans and still reads.
+   ============================================================ */
+:root{
+  --canvas:#E9E8E4; --paper:#FFFFFF; --edge:#DDDCD6;
+  --ink:#111214; --ink2:#17171A; --body:#2A2B2E; --body2:#3D3E42;
+  --mute:#6E6D66; --mute2:#8C8B83; --faint:#87867E;
+  --hair:#E9E8E3; --hair2:#E4E3DD; --pill:#DCDBD5;
+  --sunk:#F6F6F3; --numeral:#DCDBD5;
+  --mark:#F4DC4B; --mark-deep:#EFD62F; --link:#0B58BB;
+  --up:#166B4A; --down:#B0342A;
+  /* ---- v3 data-viz tokens (data blocks only; validated via dataviz skill) ---- */
+  /* categorical series palette c1–c6 (dataviz default, CVD-safe on #FFFFFF) */
+  --c1:#2a78d6; --c2:#eb6834; --c3:#1baf7a; --c4:#eda100; --c5:#e87ba4; --c6:#008300;
+  /* one signature accent (calendar today / due dates / highlight card) */
+  --accent:#4a3aa7; --accent-soft:#ECEAF7; --accent-ink:#2E2470;
+  /* status (dataviz status palette; pills always carry a label, never color alone) */
+  --warn:#B7791F; --warn-soft:#FBF0DA;
+  --up-soft:#DDEAE3; --down-soft:#F3DCD9;
+  /* depth — scoped to data blocks, never the skeleton */
+  --r:6px; --r-pill:999px;
+  --lift:0 1px 2px rgba(17,18,20,.06), 0 3px 10px rgba(17,18,20,.05);
+  --sans:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.paper{max-width:1040px;margin:0 auto;background:var(--paper);border:1px solid var(--edge)}
+.body{padding:34px 48px 52px}
+/* dashboard/newsletter hybrid: data blocks span full width, prose stays a readable measure */
+.prose{font:400 16px/1.6 var(--sans);color:var(--body2);max-width:66ch;margin:0 0 12px}
+a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(0,0,0,.22)}
+a:hover{border-bottom-color:currentColor;color:var(--link)}
+p{margin:0 0 12px}
+strong,b{font-weight:700}
+.mark{background:var(--mark);padding:0 3px}
+.src,.item .src,.lead .src,.det .src,.linklist .src{font:400 12px/1.5 var(--sans);
+  color:var(--faint);margin:0}
+.up{color:var(--up)}.down{color:var(--down)}
+
+/* ---------- masthead ---------- */
+.masthead{background:var(--ink);color:#fff;padding:20px 40px;display:flex;
+  justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.wordmark{font:800 19px/1 var(--sans);letter-spacing:-.02em}
+.stamp{font:500 11.5px/1.4 var(--sans);letter-spacing:.06em;color:#A7A6A0;
+  font-variant-numeric:tabular-nums}
+
+/* ---------- jump bar ---------- */
+.jump{padding:14px 40px;border-bottom:1px solid var(--hair2);display:flex;gap:7px;flex-wrap:wrap}
+.chip{font:600 11.5px/1 var(--sans);letter-spacing:.04em;text-transform:uppercase;
+  border:1px solid var(--pill);border-radius:999px;padding:7px 12px;color:#4A4A4E}
+.chip.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.chip:hover{color:#fff;background:var(--ink);border-color:var(--ink)}
+
+/* ---------- the line ---------- */
+.the-line{font:600 26px/1.28 var(--sans);letter-spacing:-.026em;margin:0 0 32px;max-width:21em}
+
+/* ---------- section rules ---------- */
+.rule{display:flex;align-items:center;gap:10px;margin:0 0 16px}
+.rule .tag{font:700 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;
+  background:var(--ink);color:#fff;padding:6px 9px}
+.rule .bar{flex:1;height:2px;background:var(--ink)}
+.rule .mins{font:600 11px/1 var(--sans);color:var(--mute2);white-space:nowrap}
+
+/* ---------- your day ---------- */
+.your-day{border:1px solid var(--pill);border-top:2px solid var(--ink);margin:0 0 32px}
+.your-day .cal{font:400 15.5px/1.55 var(--sans);color:var(--body2);
+  padding:15px 18px;margin:0;border-bottom:1px solid var(--hair)}
+.day-row{display:grid;grid-template-columns:76px 1fr;gap:0 14px;padding:12px 18px;
+  border-bottom:1px solid var(--hair);align-items:baseline}
+.day-row:last-child{border-bottom:0}
+.tick{font:700 10.5px/1.5 var(--sans);letter-spacing:.11em;text-transform:uppercase;color:var(--ink)}
+.tick.muted{color:var(--mute2)}
+.day-row p{font:400 15.5px/1.55 var(--sans);color:var(--body2);margin:0}
+
+/* ---------- lead ---------- */
+.lead h1{font:700 31px/1.12 var(--sans);letter-spacing:-.03em;margin:0 0 14px;max-width:14em}
+.lead .bluf{font:400 17.5px/1.55 var(--sans);color:var(--body);max-width:64ch}
+.lead p{font:400 16px/1.6 var(--sans);color:var(--body2);max-width:66ch}
+
+/* ---------- items ---------- */
+.item{display:grid;grid-template-columns:44px 1fr;gap:0 16px;margin:0 0 24px}
+.item + .item{border-top:1px solid var(--hair);padding-top:24px}
+.item .n{font:800 26px/0.9 var(--sans);color:var(--numeral);letter-spacing:-.03em}
+.item h3{font:700 20px/1.24 var(--sans);letter-spacing:-.022em;margin:0 0 8px;max-width:62ch}
+.item p{font:400 16px/1.6 var(--sans);color:var(--body2);max-width:66ch}
+
+/* ---------- axioms ---------- */
+.ax{background:var(--sunk);border-top:2px solid var(--ink);padding:14px 16px;
+  font:400 15.5px/1.55 var(--sans);color:var(--body2);margin:0 0 12px;max-width:74ch}
+.ax + .ax{margin-top:-4px}
+.ax b{font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+  display:block;margin-bottom:5px;color:var(--ink)}
+.ax-stack{background:var(--sunk);border-top:2px solid var(--ink);padding:16px 18px;
+  display:flex;flex-direction:column;gap:12px;margin:0 0 12px}
+.ax-stack .ax{background:none;border:0;padding:0;margin:0}
+
+/* ---------- expandables ---------- */
+details{margin:13px 0 0}
+details > summary{list-style:none;cursor:pointer;font:600 12.5px/1 var(--sans);
+  letter-spacing:.03em;text-transform:uppercase;color:var(--ink);
+  display:inline-flex;gap:8px;align-items:center;border:1px solid var(--pill);
+  border-radius:999px;padding:9px 14px}
+details > summary::-webkit-details-marker{display:none}
+details > summary::after{content:"+";font-weight:700}
+details[open] > summary::after{content:"\2212"}
+details > summary:hover{border-color:var(--ink)}
+.det{padding-top:13px}
+.det p{font:400 15.5px/1.6 var(--sans);color:#4A4A4E}
+
+/* ---------- figures ---------- */
+figure{margin:0 0 16px}
+figure img{display:block;width:100%;height:auto;background:var(--sunk)}
+figcaption{font:400 12px/1.5 var(--sans);color:var(--faint);margin-top:7px}
+.imgfail{display:block;background:repeating-linear-gradient(135deg,#F2F2EF 0 9px,#E9E9E4 9px 18px);
+  border-left:3px solid var(--ink);padding:22px 20px;font:400 16px/1.55 var(--sans);color:var(--body2)}
+
+/* ---------- markets ---------- */
+.tape{display:flex;flex-wrap:wrap;gap:1px;background:var(--pill);
+  border:1px solid var(--pill);margin:0 0 14px}
+.tape div{flex:1 1 90px;background:var(--paper);padding:11px 13px 10px}
+.tape .t{font:700 10px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--mute2)}
+.tape .v{font:600 19px/1.2 var(--mono);letter-spacing:-.02em;margin-top:6px;
+  font-variant-numeric:tabular-nums}
+.tape .c{font:500 12.5px/1 var(--mono);margin-top:4px;font-variant-numeric:tabular-nums}
+.spark{display:block;width:100%;height:46px;margin:0 0 14px}
+
+/* ---------- language ---------- */
+.phrase{background:var(--sunk);border-top:2px solid var(--ink);padding:20px 22px;margin:0 0 14px}
+.phrase .target{font:700 25px/1.35 var(--sans);letter-spacing:-.022em;margin:0 0 9px}
+.phrase .gloss{font:400 13px/1.5 var(--mono);color:var(--faint);margin:0 0 7px}
+.phrase .natural{font:400 16px/1.55 var(--sans);color:var(--body2);margin:0}
+.note{border-left:3px solid var(--mark-deep);padding:2px 0 2px 15px;margin:0 0 12px;
+  font:400 16px/1.6 var(--sans);color:var(--body2)}
+.tagline{font:500 12px/1 var(--mono);color:var(--faint);letter-spacing:.05em;margin:0 0 9px}
+
+/* ---------- links ---------- */
+.linklist{display:flex;flex-direction:column;gap:16px;margin:0 0 34px}
+.linklist > div + div{border-top:1px solid var(--hair);padding-top:16px}
+.head{font:700 17px/1.3 var(--sans);letter-spacing:-.018em;display:inline-block;margin-bottom:4px}
+.meta{font:500 11.5px/1.5 var(--mono);color:var(--mute2);margin-bottom:5px}
+.linklist p{font:400 15.5px/1.55 var(--sans);color:#4A4A4E;margin:0}
+
+/* ---------- also today ---------- */
+.radar{display:flex;flex-direction:column;margin:0 0 34px}
+.radar div{border-top:1px solid var(--hair);padding:11px 0;
+  font:400 15.5px/1.55 var(--sans);color:var(--body2)}
+.radar b{font:700 10.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--mute2);margin-right:11px}
+
+/* ---------- close ---------- */
+.close{background:var(--ink);color:#F2F1EC;padding:28px 30px;margin-top:34px}
+.close blockquote{margin:0 0 8px;font:600 22px/1.34 var(--sans);letter-spacing:-.022em}
+.close cite{font:400 13px/1.5 var(--sans);font-style:normal;color:#9A9A94;display:block;margin-bottom:22px}
+.close a{border-bottom-color:rgba(255,255,255,.3)}
+.close a:hover{color:#fff;border-bottom-color:#fff}
+.gift{border-top:1px solid #2C2D31;padding-top:18px}
+.gift .kicker{font:700 10.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mark);margin-bottom:9px}
+.gift p{font:400 15.5px/1.6 var(--sans);margin:0;color:#CFCEC8}
+.colophon{font:400 11.5px/1.7 var(--mono);color:var(--mute2);margin-top:20px}
+
+/* ---------- v3 data components (data blocks only; skeleton never uses these) ---------- */
+.viz{margin:0 0 16px}
+.viz-cap{font:600 11px/1.4 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--mute2);margin:0 0 9px}
+.viz svg{display:block;width:100%;height:auto;overflow:visible}
+.viz svg.ring{width:112px;height:112px;flex:none}
+.viz svg.gauge{width:172px;height:auto;flex:none}
+.viz-note{font:400 12.5px/1.5 var(--sans);color:var(--faint);margin:7px 0 0}
+
+/* meters — pill progress */
+.meter{display:grid;grid-template-columns:1fr auto;gap:5px 12px;align-items:center;margin:0 0 11px}
+.meter .lab{font:600 13.5px/1.3 var(--sans);color:var(--body)}
+.meter .val{font:700 13px/1 var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+.meter .track{grid-column:1 / -1;height:12px;background:var(--sunk);border:1.5px solid var(--ink);border-radius:var(--r-pill);overflow:hidden}
+.meter .fill{height:100%;border-radius:var(--r-pill);background:var(--accent);
+  background-image:repeating-linear-gradient(90deg,transparent 0 12px,rgba(255,255,255,.35) 12px 13px)}
+.meter .fill.up{background:var(--up)}.meter .fill.c1{background:var(--c1)}
+
+/* segmented / milestone */
+.seg{display:flex;gap:3px;margin:0 0 6px}
+.seg i{flex:1;height:12px;border-radius:3px;background:var(--pill);border:1.5px solid var(--ink)}
+.seg i.on{background:var(--accent)}
+
+/* status pills + category dots */
+.pill{display:inline-flex;align-items:center;gap:5px;font:700 10.5px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;padding:4px 8px;border-radius:var(--r-pill);border:1.5px solid currentColor}
+.pill.ok{background:var(--up-soft);color:var(--up)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--down-soft);color:var(--down)}
+.pill.acc{background:var(--accent-soft);color:var(--accent-ink)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;vertical-align:middle}
+
+/* table */
+.dtable{width:100%;border-collapse:collapse;font:400 13.5px/1.45 var(--sans);
+  border:2px solid var(--ink);border-radius:var(--r);overflow:hidden}
+.dtable thead th{font:700 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mute2);text-align:left;padding:11px 12px;background:var(--sunk);border-bottom:1px solid var(--hair2)}
+.dtable td{padding:9px 12px;border-bottom:1px solid var(--hair);color:var(--body2)}
+.dtable tbody tr:nth-child(even){background:var(--sunk)}
+.dtable tbody tr:last-child td{border-bottom:0}
+.dtable .num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* calendar strip */
+.cal{border:2px solid var(--ink);border-radius:var(--r);overflow:hidden}
+.cal-head{display:grid;grid-template-columns:repeat(7,1fr)}
+.cal-head div{font:700 10px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;
+  color:var(--mute2);text-align:center;padding:9px 0;background:var(--sunk)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+.cal-grid div{min-height:54px;border-top:1px solid var(--hair);border-left:1px solid var(--hair);
+  padding:6px 6px 5px;font:600 12px/1 var(--mono);color:var(--body2)}
+.cal-grid div:nth-child(7n+1){border-left:0}
+.cal-grid .today .d{display:inline-flex;width:21px;height:21px;align-items:center;justify-content:center;
+  border-radius:50%;background:var(--accent);color:#fff}
+.cal-chip{display:block;margin-top:5px;font:600 9.5px/1.3 var(--sans);color:var(--accent-ink);
+  background:var(--accent-soft);border-radius:4px;padding:2px 5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cal-chip.due{color:var(--down);background:var(--down-soft)}
+
+/* streak / contribution heatmap */
+.heat{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,11px);grid-auto-columns:11px;gap:3px}
+.heat i{border-radius:2px;background:var(--sunk);box-shadow:inset 0 0 0 1px var(--hair2)}
+.heat i.l1{background:var(--up);opacity:.3}
+.heat i.l2{background:var(--up);opacity:.6}
+.heat i.l3{background:var(--up)}
+
+/* highlight card */
+.hcard{background:var(--accent-soft);border:1.5px solid var(--ink);border-left:5px solid var(--accent);border-radius:var(--r);
+  padding:14px 16px;box-shadow:var(--lift);margin:0 0 16px}
+.hcard .k{font:700 10px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:7px}
+.hcard p{font:400 15px/1.55 var(--sans);color:var(--body);margin:0}
+
+/* stat tiles — elevated variant of a scoreboard cell */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:0 0 16px}
+.tile{background:var(--paper);border:1.5px solid var(--ink);border-radius:var(--r);padding:12px 14px;box-shadow:var(--lift)}
+.tile .t{font:700 10px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mute2)}
+.tile .v{font:700 24px/1.1 var(--mono);letter-spacing:-.02em;margin-top:6px;font-variant-numeric:tabular-nums}
+.tile .c{font:600 12px/1 var(--mono);margin-top:4px}
+
+/* ---------- v3 more components & variants ---------- */
+/* terminal / code block — always dark, fixed syntax colors (a deliberate exception to tokens) */
+.term{background:#14151A;color:#E6E6E6;border-radius:var(--r);padding:14px 16px;
+  font:500 12.5px/1.75 var(--mono);overflow-x:auto;box-shadow:var(--lift);margin:0 0 16px}
+.term .p{color:#7CC79E}.term .a{color:#9DB8FF}.term .m{color:#8C8B83}
+/* waffle grid — 10×10 = a percentage, pixel-block */
+.waffle{display:grid;grid-template-columns:repeat(10,14px);gap:3px;margin:0 0 8px}
+.waffle i{width:14px;height:14px;border-radius:2px;background:var(--sunk);box-shadow:inset 0 0 0 1px var(--hair2)}
+.waffle i.on{background:var(--accent);box-shadow:inset 0 0 0 1px var(--ink)}
+.waffle i.on2{background:var(--c3);box-shadow:inset 0 0 0 1px var(--ink)}
+/* kbd / tag chips — pressable-key look */
+.kbd{display:inline-block;font:700 11px/1 var(--mono);color:var(--ink);background:var(--paper);
+  border:1.5px solid var(--ink);border-radius:5px;padding:5px 8px;box-shadow:0 2px 0 var(--ink);margin:0 5px 5px 0}
+/* callouts — info / ok / warn / bad, with a glyph tile */
+.callout{display:flex;gap:11px;border:1.5px solid var(--ink);border-radius:var(--r);
+  padding:12px 14px;margin:0 0 12px;background:var(--paper);box-shadow:var(--lift)}
+.callout .ic{flex:none;width:24px;height:24px;border-radius:6px;display:flex;align-items:center;
+  justify-content:center;font:700 13px/1 var(--mono);color:#fff}
+.callout.info .ic{background:var(--accent)}.callout.ok .ic{background:var(--up)}
+.callout.warn .ic{background:var(--warn)}.callout.bad .ic{background:var(--down)}
+.callout p{font:400 14px/1.5 var(--sans);color:var(--body);margin:0;max-width:64ch}
+/* KPI hero card — one big number */
+.kpi{border:1.5px solid var(--ink);border-radius:var(--r);padding:16px 18px;box-shadow:var(--lift);margin:0 0 16px;max-width:320px}
+.kpi .t{font:700 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute2)}
+.kpi .v{font:800 40px/1 var(--mono);letter-spacing:-.03em;margin:9px 0 4px;font-variant-numeric:tabular-nums}
+.kpi .d{font:700 12px/1 var(--mono)}
+/* agenda / timeline list */
+.agenda{list-style:none;margin:0 0 14px;padding:0;border-left:2px solid var(--ink)}
+.agenda li{display:grid;grid-template-columns:70px 1fr;gap:12px;padding:9px 0 9px 16px;
+  position:relative;border-bottom:1px solid var(--hair)}
+.agenda li:last-child{border-bottom:0}
+.agenda li::before{content:"";position:absolute;left:-6px;top:13px;width:9px;height:9px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 2px var(--paper),0 0 0 3.5px var(--ink)}
+.agenda .tm{font:700 12px/1.4 var(--mono);color:var(--mute2)}
+.agenda .ev{font:400 14px/1.4 var(--sans);color:var(--body)}
+/* sparkbars — inline mini bar row */
+.sparkbars{display:inline-flex;align-items:flex-end;gap:2px;height:28px;vertical-align:middle}
+.sparkbars i{width:5px;background:var(--c1);border-radius:1px}
+.sparkbars i.hi{background:var(--accent)}
+/* horizontal bars — ranked list */
+.hbars{display:grid;gap:8px;margin:0 0 14px}
+.hbar{display:grid;grid-template-columns:104px 1fr auto;gap:10px;align-items:center}
+.hbar .n{font:600 12px/1.3 var(--mono);color:var(--body2);text-align:right;white-space:nowrap}
+.hbar .b{height:16px;border:1.5px solid var(--ink);border-radius:4px;background:var(--sunk);overflow:hidden}
+.hbar .b i{display:block;height:100%;background:var(--c1)}
+.hbar .b i.acc{background:var(--accent)}
+.hbar .v{font:700 12px/1 var(--mono);color:var(--ink);min-width:20px}
+/* log table variant */
+.dtable.log,.dtable.log td{font-family:var(--mono);font-size:12.5px}
+.dtable.log td{color:var(--body)}
+
+/* ---------- responsive ---------- */
+@media(max-width:720px){
+  body{background:var(--paper)}
+  .paper{border:0}
+  .masthead{padding:16px 20px}
+  .jump{padding:12px 20px}
+  .body{padding:26px 20px 40px}
+  .the-line{font-size:22px}
+  .lead h1{font-size:26px}
+  .item{grid-template-columns:34px 1fr;gap:0 12px}
+  .item .n{font-size:20px}
+  .item h3{font-size:18.5px}
+  .close{padding:24px 20px}
+  .close blockquote{font-size:19px}
+  .tape div{flex:1 1 44%}
+  .day-row{grid-template-columns:1fr;gap:4px}
+}
+
+/* ---------- print ---------- */
+@media print{
+  body{background:#fff}.paper{border:0;max-width:none}
+  details > summary{display:none}.det{padding-top:0}
+  a::after{content:" (" attr(href) ")";font:400 8pt var(--mono);color:#777;word-break:break-all}
+  a{border:0}.jump{display:none}
+}
+
+/* ---------- dark: same structure, inverted paper. Delete this block for light only. ---------- */
+@media(prefers-color-scheme:dark){
+  :root{
+    --canvas:#0E0E10; --paper:#161618; --edge:#2A2A2D;
+    --ink:#F2F1EC; --ink2:#F2F1EC; --body:#D8D7D1; --body2:#BEBDB6;
+    --mute:#8E8D86; --mute2:#8E8D86; --faint:#87867E;
+    --hair:#26262A; --hair2:#26262A; --pill:#33333A;
+    --sunk:#1E1E21; --numeral:#3A3A40; --link:#7FB2FF;
+    --up:#4FB286; --down:#E0705C;
+    /* v3 data-viz tokens — dark steps (dataviz default, CVD-safe on #161618) */
+    --c1:#3987e5; --c2:#d95926; --c3:#199e70; --c4:#c98500; --c5:#d55181; --c6:#008300;
+    --accent:#9085e9; --accent-soft:#232049; --accent-ink:#C9C2F5;
+    --warn:#E0A94A; --warn-soft:#2E2712;
+    --up-soft:#173229; --down-soft:#33211E;
+    --lift:0 1px 2px rgba(0,0,0,.4), 0 3px 10px rgba(0,0,0,.32);
+  }
+  a{border-bottom-color:rgba(255,255,255,.25)}
+  .masthead,.close{background:#000}
+  .rule .tag{background:var(--mark);color:#111214}
+  .rule .bar{background:var(--pill)}
+  .ax,.ax-stack,.phrase,.your-day{border-top-color:var(--mark)}
+  .mark{background:var(--mark-deep);color:#111214}
+  .imgfail{background:#1E1E21;border-left-color:var(--mark)}
+  figure img{opacity:.9}
+}
+</style>
+</head>
+<body>
+
+<div class="paper">
+
+<!-- ══════════════════ MASTHEAD ══════════════════ -->
+<header class="masthead">
+  <div class="wordmark">Day in Review</div>
+  <div class="stamp">WED 19 AUG 2026 · AS OF 5:30 PM MDT · 3 MIN READ</div>
+</header>
+
+<!-- ══════════════════ JUMP BAR — one chip per section that rendered ══════════════════ -->
+<nav class="jump">
+  <a class="chip on" href="#scoreboard">Scoreboard</a>
+  <a class="chip" href="#shipped">Shipped</a>
+  <a class="chip" href="#moved">Moved forward</a>
+  <a class="chip" href="#goals">Goals</a>
+  <a class="chip" href="#trend">Trend</a>
+  <a class="chip" href="#tomorrow">Tomorrow</a>
+  <a class="chip" href="#close">Close</a>
+</nav>
+
+<div class="body">
+
+<!-- ══════════════════ THE LINE ══════════════════ -->
+<p class="the-line">A build day, Sam: two PRs merged and the migration ticket finally moved to <span class="mark">Done</span>.</p>
+
+<!-- ══════════════════ SCOREBOARD ══════════════════ -->
+<section id="scoreboard">
+  <div class="rule"><div class="tag">Scoreboard</div><div class="bar"></div></div>
+  <div class="tape">
+    <div><div class="t">PRs merged</div><div class="v">2</div><div class="c up">+2</div></div>
+    <div><div class="t">Commits</div><div class="v">11</div><div class="c up">+11</div></div>
+    <div><div class="t">Issues done</div><div class="v">1</div><div class="c up">+1</div></div>
+    <div><div class="t">Story pts</div><div class="v">5</div><div class="c up">+5</div></div>
+    <div><div class="t">Meetings</div><div class="v">2.0h</div><div class="c">—</div></div>
+    <div><div class="t">Focus</div><div class="v">5.5h</div><div class="c up">↑</div></div>
+  </div>
+  <!-- Sparkline of PRs merged, last 10 working days, from LEDGER.md. viewBox 0 0 300 46 -->
+  <svg class="spark" viewBox="0 0 300 46" preserveAspectRatio="none" role="img"
+       aria-label="PRs merged, last ten working days, ending at two">
+    <polyline fill="none" stroke="var(--up)" stroke-width="1.5" stroke-linejoin="round"
+      points="0,32 33,42 67,23 100,32 133,14 167,23 200,42 233,32 267,32 300,14"/>
+    <circle cx="300" cy="14" r="2.5" fill="var(--up)"/>
+  </svg>
+  <p style="font:400 16px/1.6 var(--sans);color:var(--body2)">Heavier on shipping than the week's average, and the first day since Thursday with more focus time than meetings.</p>
+  <p class="src">Counts as of 5:30 PM MDT · <a href="https://github.com/eg-internal">GitHub</a>, <a href="https://expediagroup.atlassian.net">Jira</a>, calendar</p>
+</section>
+
+<!-- ══════════════════ SHIPPED ══════════════════ -->
+<section id="shipped" style="margin-top:34px">
+  <div class="rule"><div class="tag">Shipped</div><div class="bar"></div><div class="mins">3 ITEMS · 1 MIN</div></div>
+
+  <article class="item">
+    <div class="n">01</div>
+    <div>
+      <h3>Merged the RCP migration for polaris-api-gateway</h3>
+      <p>The gateway now deploys through the automated merge-to-main pipeline, closing out the manual prod gate that had been slowing every release. It went green on the first prod run, with <span class="mark">11&nbsp;commits</span> squashed into the one merge.</p>
+      <p class="ax"><b>Why it counts</b>This is the app you flagged last week as the riskiest in the migration set. It moving clears the path for the three that were waiting behind it.</p>
+      <details>
+        <summary>The tricky part</summary>
+        <div class="det">
+          <p>The run-unique image tag was colliding on re-runs. Pinning the tag to the commit sha instead of the branch fixed it, and that same fix drops into the other four gateways unchanged.</p>
+          <p class="src"><a href="https://github.com/eg-internal">PR #482</a></p>
+        </div>
+      </details>
+      <p class="src"><a href="https://github.com/eg-internal">eg-internal · polaris-api-gateway · PR #482</a></p>
+    </div>
+  </article>
+
+  <article class="item">
+    <div class="n">02</div>
+    <div>
+      <h3>Closed the review-emailer RBAC fix</h3>
+      <p>ESCTEN-1487 moved to Done: reviewers without the manager role no longer see the send button, which was the bug support had escalated twice this month. Five story points, and it shipped with the PR above.</p>
+      <p class="ax"><b>In your book</b>That is the second RBAC ticket off the review-emailer backlog this sprint, which puts that workstream at four of its seven stories.</p>
+      <p class="src"><a href="https://expediagroup.atlassian.net">Jira · ESCTEN-1487</a></p>
+    </div>
+  </article>
+
+  <article class="item">
+    <div class="n">03</div>
+    <div>
+      <h3>Reviewed three teammate PRs</h3>
+      <p>Two approved, one sent back over a missing null check on the reservation-source lookup.</p>
+      <p class="src"><a href="https://github.com/eg-internal">Review activity</a></p>
+    </div>
+  </article>
+</section>
+
+<!-- ══════════════════ MOVED FORWARD ══════════════════ -->
+<section id="moved" style="margin-top:34px">
+  <div class="rule"><div class="tag">Moved forward</div><div class="bar"></div><div class="mins">2 ITEMS · 1 MIN</div></div>
+
+  <article class="item">
+    <div class="n">01</div>
+    <div>
+      <h3>Grid observability dashboard, most of the way wired</h3>
+      <p>The reservation-grid latency panels are pulling live Datadog data now; what is left is the p99 alert thresholds and a review from the SRE on call. Call it 70% of the ticket, up from 30% yesterday.</p>
+      <p class="ax"><b>What's next</b>Thresholds need one real traffic day to calibrate, so this lands tomorrow afternoon at the earliest.</p>
+      <p class="src"><a href="https://github.com/eg-internal">Draft PR #488</a></p>
+    </div>
+  </article>
+
+  <article class="item">
+    <div class="n">02</div>
+    <div>
+      <h3>Drafted the API-metrics RFC section on cardinality</h3>
+      <p>Wrote the part everyone was avoiding: how to keep per-endpoint metrics from exploding the tag budget. It is in the shared doc for comment ahead of Thursday's review.</p>
+      <p class="src"><a href="https://expediagroup.atlassian.net/wiki">Confluence · API Metrics RFC</a></p>
+    </div>
+  </article>
+</section>
+
+<!-- ══════════════════ GOAL CHECK ══════════════════ -->
+<section id="goals" style="margin-top:34px">
+  <div class="rule"><div class="tag">Goal check</div><div class="bar"></div></div>
+  <p style="font:400 16px/1.6 var(--sans);color:var(--body2)">HDC migration is at <span class="mark">12 of ~20 apps</span>, up one today. At the last two weeks' pace that is a late-October finish, which lines up with the Q4 estimate you gave in planning.</p>
+  <p class="ax"><b>In your book</b>The three gateways waiting behind polaris are now unblocked, so tomorrow could move the number by more than one for the first time.</p>
+  <p class="src">Trail in <a href="https://github.com/eg-internal">LEDGER</a> · goal set 2026-08-01</p>
+</section>
+
+<!-- ══════════════════ TREND & STREAK ══════════════════ -->
+<section id="trend" style="margin-top:34px">
+  <div class="rule"><div class="tag">Trend &amp; streak</div><div class="bar"></div></div>
+  <p style="font:400 16px/1.6 var(--sans);color:var(--body2)">Eight working days in a row with something shipped or closed. This week so far: 7 PRs merged, 3 issues done, 5 reviews, roughly 28 hours of focus against 9 of meetings. The month is running a little ahead of July's shipping pace.</p>
+  <details>
+    <summary>How the streak counts</summary>
+    <div class="det"><p>A day counts toward the streak when at least one PR merged or one issue reached Done. Review-only and meeting-only days keep the streak alive but are marked lighter in the ledger.</p></div>
+  </details>
+</section>
+
+<!-- ══════════════════ TOMORROW ══════════════════ -->
+<section id="tomorrow" style="margin-top:34px">
+  <div class="rule"><div class="tag">Tomorrow</div><div class="bar"></div></div>
+  <div class="your-day">
+    <div class="day-row"><span class="tick">Blocked</span>
+      <p>The grid dashboard thresholds need one real traffic day before they can be set.</p></div>
+    <div class="day-row"><span class="tick">Queued</span>
+      <p>Roll the sha-tag fix into the other three gateways now that polaris proved it.</p></div>
+    <div class="day-row"><span class="tick muted">Reminder</span>
+      <p>API-metrics RFC review is Thursday; your cardinality section wants eyes before then.</p></div>
+  </div>
+</section>
+
+<!-- ══════════════════ THE CLOSE ══════════════════ -->
+<footer class="close" id="close">
+  <blockquote>“Startups take off because the founders make them take off.”</blockquote>
+  <cite>Paul Graham, <em>Do Things that Don't Scale</em>, 2013 — <a href="https://paulgraham.com/ds.html">the essay</a>, verified against the source.</cite>
+  <div class="gift">
+    <div class="kicker">One small thing</div>
+    <p>Today's <strong>11 commits</strong> is your busiest single day since June 14. The gateway migration alone was six of them. <a href="https://github.com/eg-internal">The log</a></p>
+  </div>
+</footer>
+
+<div class="colophon">Built 5:32 PM MDT · 4 sources · 720 words · Slack lane was off today.<br>
+Tomorrow: whether the three unblocked gateways move the migration number, and the grid thresholds.</div>
+
+</div><!-- /.body -->
+</div><!-- /.paper -->
+</body>
+</html>
