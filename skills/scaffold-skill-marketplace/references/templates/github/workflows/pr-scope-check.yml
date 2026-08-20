@@ -1,0 +1,75 @@
+name: PR Scope Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  scope-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Analyze PR scope
+        id: scope
+        run: |
+          BASE="${{ github.event.pull_request.base.sha }}"
+          HEAD="${{ github.event.pull_request.head.sha }}"
+
+          CHANGED_FILES=$(git diff --name-only "$BASE"..."$HEAD")
+
+          SKILLS_CHANGED=$(echo "$CHANGED_FILES" | grep -oP '^skills/[^/]+' | sort -u | grep -c . || true)
+          AGENTS_CHANGED=$(echo "$CHANGED_FILES" | grep -oP '^agents/[^/]+' | sort -u | grep -c . || true)
+          HOOKS_CHANGED=$(echo "$CHANGED_FILES" | grep -oP '^hooks/scripts/[^/]+' | sort -u | grep -c . || true)
+
+          CATEGORIES=0
+          [ "$SKILLS_CHANGED" -gt 0 ] && CATEGORIES=$((CATEGORIES + 1))
+          [ "$AGENTS_CHANGED" -gt 0 ] && CATEGORIES=$((CATEGORIES + 1))
+          [ "$HOOKS_CHANGED" -gt 0 ] && CATEGORIES=$((CATEGORIES + 1))
+          echo "$CHANGED_FILES" | grep -qP '^\.(github|gitignore)' && CATEGORIES=$((CATEGORIES + 1))
+          echo "$CHANGED_FILES" | grep -qP '^(docs/|[^/]+\.md$)' && CATEGORIES=$((CATEGORIES + 1))
+
+          echo "skills=$SKILLS_CHANGED" >> "$GITHUB_OUTPUT"
+          echo "agents=$AGENTS_CHANGED" >> "$GITHUB_OUTPUT"
+          echo "hooks=$HOOKS_CHANGED" >> "$GITHUB_OUTPUT"
+          echo "categories=$CATEGORIES" >> "$GITHUB_OUTPUT"
+
+          MULTI=false
+          REASON=""
+          if [ "$SKILLS_CHANGED" -gt 2 ]; then MULTI=true; REASON="$SKILLS_CHANGED skills modified"; fi
+          if [ "$AGENTS_CHANGED" -gt 2 ]; then MULTI=true; REASON="$REASON; $AGENTS_CHANGED agents modified"; fi
+          if [ "$SKILLS_CHANGED" -gt 1 ] && [ "$AGENTS_CHANGED" -gt 1 ]; then MULTI=true; REASON="$REASON; skills and agents both changed"; fi
+          if [ "$CATEGORIES" -gt 3 ]; then MULTI=true; REASON="$REASON; $CATEGORIES distinct areas touched"; fi
+
+          echo "multi=$MULTI" >> "$GITHUB_OUTPUT"
+          echo "reason=$REASON" >> "$GITHUB_OUTPUT"
+
+      - name: Post scope warning
+        if: steps.scope.outputs.multi == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          REASON: ${{ steps.scope.outputs.reason }}
+        run: |
+          MARKER="<!-- pr-scope-warning -->"
+          BODY="$MARKER
+          ### ⚠️ PR Scope Warning
+
+          This PR appears to touch multiple concerns ($REASON).
+
+          Consider splitting it so each PR has a single logical objective — it
+          makes review faster and keeps the changelog meaningful. If the scope
+          is intentional, ignore this comment."
+
+          EXISTING=$(gh pr view "$PR" --json comments --jq \
+            ".comments[] | select(.body | contains(\"$MARKER\")) | .id" | head -n1 || true)
+          if [ -z "$EXISTING" ]; then
+            gh pr comment "$PR" --body "$BODY"
+          fi
