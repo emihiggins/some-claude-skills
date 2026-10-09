@@ -15,7 +15,6 @@ WORKING_DIR="${1:?Missing working-dir}"
 
 HAS_CONFIG=false
 CONFIG_PATH=""
-SERVERS=""
 
 # Check both config locations
 if [[ -f "$WORKING_DIR/.mcp.json" ]]; then

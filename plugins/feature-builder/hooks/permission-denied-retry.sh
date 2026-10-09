@@ -8,7 +8,6 @@ set -euo pipefail
 
 INPUT=$(cat)
 
-TOOL_NAME=$(echo "$INPUT" | jq -r '.tool_name // empty')
 FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
 COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
 

@@ -48,6 +48,7 @@ jobs:
           if [ "$SKILLS_CHANGED" -gt 1 ] && [ "$AGENTS_CHANGED" -gt 1 ]; then MULTI=true; REASON="$REASON; skills and agents both changed"; fi
           if [ "$CATEGORIES" -gt 3 ]; then MULTI=true; REASON="$REASON; $CATEGORIES distinct areas touched"; fi
 
+          REASON="${REASON#; }"
           echo "multi=$MULTI" >> "$GITHUB_OUTPUT"
           echo "reason=$REASON" >> "$GITHUB_OUTPUT"
 

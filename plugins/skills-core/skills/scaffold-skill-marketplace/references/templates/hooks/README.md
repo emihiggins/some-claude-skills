@@ -20,4 +20,5 @@ wired in `hooks.json` and reference scripts under `hooks/scripts/` via the
 
 - Hook scripts receive a JSON payload on **stdin** (fields vary by event; `UserPromptSubmit` includes `prompt`).
 - **stdout** from `UserPromptSubmit` is injected into the model's context.
-- A non-zero exit from a `PreToolUse` hook can block the tool call — keep exits `0` unless you intend to block.
+- Exit code `2` from a `PreToolUse` hook blocks the tool call and feeds stderr back to Claude; any other
+  non-zero exit is a non-blocking error. Keep exits `0` unless you intend to block.

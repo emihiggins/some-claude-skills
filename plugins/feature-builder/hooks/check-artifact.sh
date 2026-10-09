@@ -7,7 +7,6 @@
 
 INPUT=$(cat)
 AGENT_TYPE=$(echo "$INPUT" | jq -r '.agent_type // empty')
-AGENT_ID=$(echo "$INPUT" | jq -r '.agent_id // empty')
 CWD=$(echo "$INPUT" | jq -r '.cwd // empty')
 
 # Find active session

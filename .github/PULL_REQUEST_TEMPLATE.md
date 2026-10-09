@@ -17,5 +17,5 @@
 <!-- How did you verify? e.g. ran scripts/validate-skill.sh, tested with
      `claude --plugin-dir .` and confirmed the skill in /skills. -->
 
-- [ ] Ran `bash scripts/validate-skill.sh skills/<name>` (if a skill changed)
+- [ ] Ran `bash scripts/validate-skill.sh plugins/<plugin>/skills/<name>` (if a skill changed)
 - [ ] Tested locally with `claude --plugin-dir .`

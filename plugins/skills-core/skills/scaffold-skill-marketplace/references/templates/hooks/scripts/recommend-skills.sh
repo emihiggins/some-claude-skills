@@ -31,7 +31,7 @@ SKILLS_DIR="$ROOT/skills"
 [ -d "$SKILLS_DIR" ] || exit 0
 
 # --- scan skills for a name match ----------------------------------------
-MATCHES=""
+NAMES=""
 for skill_dir in "$SKILLS_DIR"/*/; do
   [ -d "$skill_dir" ] || continue
   name="$(basename "$skill_dir")"
@@ -39,21 +39,8 @@ for skill_dir in "$SKILLS_DIR"/*/; do
   phrase="$(printf '%s' "$name" | tr '-' ' ')"
   case "$PROMPT_LC" in
     *"$phrase"*|*"$name"*)
-      MATCHES="$MATCHES $name"
+      NAMES="$NAMES/$name"
       ;;
-  esac
-done
-
-MATCHES="$(printf '%s' "$MATCHES" | tr ' ' '\n' | grep -c . || true)"
-# Re-run to collect names (kept simple over storing arrays for bash 3.2).
-NAMES=""
-for skill_dir in "$SKILLS_DIR"/*/; do
-  [ -d "$skill_dir" ] || continue
-  name="$(basename "$skill_dir")"
-  phrase="$(printf '%s' "$name" | tr '-' ' ')"
-  case "$PROMPT_LC" in
-    *"$phrase"*|*"$name"*)
-      NAMES="$NAMES/$name" ;;
   esac
 done
 

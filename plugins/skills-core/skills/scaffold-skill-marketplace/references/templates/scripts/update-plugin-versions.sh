@@ -33,5 +33,5 @@ update_json() {
 
 echo "Bumping version to $VERSION"
 update_json "$PLUGIN_JSON" '.version = $v'
-update_json "$MARKETPLACE_JSON" '.metadata.version = $v | .plugins[0].version = $v'
+update_json "$MARKETPLACE_JSON" '.metadata.version = $v | .plugins |= map(.version = $v)'
 echo "Done."

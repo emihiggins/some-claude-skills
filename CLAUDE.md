@@ -1,14 +1,21 @@
 # Authoring conventions
 
-This repository is a **Claude Code plugin marketplace**. It publishes one plugin
-(`some-claude-skills`) whose skills, agents, and hooks are auto-discovered because
-`.claude-plugin/marketplace.json` sets `"strict": false`. Adding a skill is just
-adding a directory and merging — no manifest edit required.
+This repository is a **Claude Code plugin marketplace**. It publishes two plugins,
+each under `plugins/<plugin>/`:
+
+- `skills-core` — atomic, framework-free skills plus one skill-recommender hook.
+- `feature-builder` — the multi-agent feature workflow, its agents, and its
+  workflow-enforcement hooks. Opt-in.
+
+Each plugin's skills, agents, and hooks are auto-discovered because
+`.claude-plugin/marketplace.json` sets `"strict": false` on every plugin entry.
+Adding a skill is just adding a directory and merging — no manifest edit required.
 
 ## Skill layout
 
-- Skills live at `skills/<name>/SKILL.md`. The `skills/` tree is **flat, one level
-  deep** — Claude Code scans `skills/*/SKILL.md`, so do **not** nest skills.
+- Skills live at `plugins/<plugin>/skills/<name>/SKILL.md`. Each plugin's `skills/`
+  tree is **flat, one level deep** — Claude Code scans `skills/*/SKILL.md` under the
+  plugin root, so do **not** nest skills.
 - No `README.md` inside a skill folder — `SKILL.md` is the single entry point.
 - Optional subdirectories per skill: `references/` (deep-dive docs and templates
   loaded on demand), `scripts/` (automation), `assets/` (static files), and
@@ -52,11 +59,12 @@ Add your own prefixes as the marketplace grows — document them in this table.
 
 ## Agents
 
-- Repo-wide agents: `agents/<name>.md`. Skill-scoped agents: `skills/<skill>/agents/<name>.md`.
+- Plugin-wide agents: `plugins/<plugin>/agents/<name>.md`. Skill-scoped agents:
+  `plugins/<plugin>/skills/<skill>/agents/<name>.md`.
 - Agent files are Markdown with YAML frontmatter (`description`, optional `model`).
   `description` decides when the agent is selected; `model` is `haiku` (light),
   `sonnet` (default/fast), or `opus` (complex reasoning).
 
 ## Validation
 
-Run `bash scripts/validate-skill.sh skills/<name>` before opening a PR.
+Run `bash scripts/validate-skill.sh plugins/<plugin>/skills/<name>` before opening a PR.
