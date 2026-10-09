@@ -113,3 +113,7 @@ Validate any skill you add with:
 ```bash
 bash scripts/validate-skill.sh plugins/<plugin>/skills/<skill-name>
 ```
+
+## License
+
+MIT — see [`LICENSE`](LICENSE).
