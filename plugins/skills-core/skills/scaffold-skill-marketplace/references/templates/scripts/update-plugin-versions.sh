@@ -19,6 +19,7 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
+PLUGIN_JSON="$ROOT/.claude-plugin/plugin.json"
 MARKETPLACE_JSON="$ROOT/.claude-plugin/marketplace.json"
 
 update_json() {
@@ -31,13 +32,6 @@ update_json() {
 }
 
 echo "Bumping version to $VERSION"
-
-# Bump every per-plugin plugin.json under plugins/*/.claude-plugin/plugin.json.
-shopt -s nullglob
-for pj in "$ROOT/plugins/"*/.claude-plugin/plugin.json; do
-  update_json "$pj" '.version = $v'
-done
-
-# Bump the marketplace metadata + every plugins[].version in lockstep.
+update_json "$PLUGIN_JSON" '.version = $v'
 update_json "$MARKETPLACE_JSON" '.metadata.version = $v | .plugins |= map(.version = $v)'
 echo "Done."

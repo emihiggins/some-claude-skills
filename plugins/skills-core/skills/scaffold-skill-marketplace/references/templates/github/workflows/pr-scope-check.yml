@@ -25,16 +25,16 @@ jobs:
 
           CHANGED_FILES=$(git diff --name-only "$BASE"..."$HEAD")
 
-          SKILLS_CHANGED=$(echo "$CHANGED_FILES" | grep -oP '^plugins/[^/]+/skills/[^/]+' | sort -u | grep -c . || true)
-          AGENTS_CHANGED=$(echo "$CHANGED_FILES" | grep -oP '^plugins/[^/]+/agents/[^/]+' | sort -u | grep -c . || true)
-          HOOKS_CHANGED=$(echo "$CHANGED_FILES" | grep -oP '^plugins/[^/]+/hooks/(scripts/)?[^/]+\.sh' | sort -u | grep -c . || true)
+          SKILLS_CHANGED=$(echo "$CHANGED_FILES" | grep -oP '^skills/[^/]+' | sort -u | grep -c . || true)
+          AGENTS_CHANGED=$(echo "$CHANGED_FILES" | grep -oP '^agents/[^/]+' | sort -u | grep -c . || true)
+          HOOKS_CHANGED=$(echo "$CHANGED_FILES" | grep -oP '^hooks/scripts/[^/]+' | sort -u | grep -c . || true)
 
           CATEGORIES=0
           [ "$SKILLS_CHANGED" -gt 0 ] && CATEGORIES=$((CATEGORIES + 1))
           [ "$AGENTS_CHANGED" -gt 0 ] && CATEGORIES=$((CATEGORIES + 1))
           [ "$HOOKS_CHANGED" -gt 0 ] && CATEGORIES=$((CATEGORIES + 1))
           echo "$CHANGED_FILES" | grep -qP '^\.(github|gitignore)' && CATEGORIES=$((CATEGORIES + 1))
-          echo "$CHANGED_FILES" | grep -qP '^(docs/|[^/]+\.md$|scripts/)' && CATEGORIES=$((CATEGORIES + 1))
+          echo "$CHANGED_FILES" | grep -qP '^(docs/|[^/]+\.md$)' && CATEGORIES=$((CATEGORIES + 1))
 
           echo "skills=$SKILLS_CHANGED" >> "$GITHUB_OUTPUT"
           echo "agents=$AGENTS_CHANGED" >> "$GITHUB_OUTPUT"
